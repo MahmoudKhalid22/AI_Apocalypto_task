@@ -24,7 +24,7 @@ function Modal({ data, onClose, isOpen }: any) {
   // console.log(attributes);
   return (
     <div
-      className={`fixed top-0 right-0 ${
+      className={`absolute w-full h-full top-0 right-0 ${
         isOpen ? "translate-x-0" : "translate-x-full"
       } bg-gray-900 bg-opacity-50 min-h-screen
       h-auto transition-all
@@ -60,7 +60,7 @@ function Modal({ data, onClose, isOpen }: any) {
                 {blockNumberMinted?.value}
               </div>
             )}
-            <div className="bg-pink-200 p-2 rounded w-fit">
+            <div className="bg-pink-200 p-2 rounded w-fit overflow-x-scroll">
               <strong>GENERAL NAME</strong>
               <br />
               {name}
@@ -77,7 +77,7 @@ function Modal({ data, onClose, isOpen }: any) {
                 <p key={attribute}>{attribute}</p>
               ))}
             </div>
-            <div className="bg-pink-200 p-2 rounded ">
+            <div className="bg-pink-200 p-2 rounded overflow-x-scroll">
               <strong>DISCRIPTION</strong>
               <br />
               {metadata?.description}
@@ -87,7 +87,7 @@ function Modal({ data, onClose, isOpen }: any) {
               <br />
               {metadata?.name}
             </div>
-            <div className="bg-pink-200 p-2 rounded ">
+            <div className="bg-pink-200 p-2 rounded overflow-x-scroll">
               <strong>CONTRACT TYPE</strong>
               <br />
               {contractType}
