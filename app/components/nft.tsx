@@ -46,8 +46,8 @@ function Collections() {
   console.log(loading);
   return (
     <div>
-      <h1>Collections</h1>
-      <div className="flex items-center justify-center gap-12">
+      <h1 className="text-center mb-12 mt-4 text-3xl">Collections</h1>
+      <div className="flex flex-wrap items-center justify-center gap-12">
         {loading && <p className="text-center">loading...</p>}
         {!loading &&
           collections?.map((item: any, i: number) => (

@@ -6,8 +6,8 @@ import React, { useEffect, useState } from "react";
 function Modal({ data, onClose }: any) {
   return (
     <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-start justify-center z-50">
-      <div className="bg-pink-200 p-4 w-full max-w-4xl mx-auto flex rounded-lg shadow-lg mt-10 relative">
-        <div className="flex-1 w-1/2">
+      <div className="bg-pink-200 p-4 w-full max-w-4xl mx-auto flex rounded-lg shadow-lg mt-10 relative  md:flex-row flex-col h-auto">
+        <div className="flex-1 w-full md:w-1/2">
           {data?.collection_logo && (
             <Image
               className="w-full h-full object-contain rounded-lg"
@@ -18,14 +18,14 @@ function Modal({ data, onClose }: any) {
             />
           )}
         </div>
-        <div className="flex-1 w-1/2 bg-pink-300 p-8 rounded-lg ml-4 relative">
+        <div className="flex-1 w-full md:w-1/2 bg-pink-300 my-2 p-8 rounded-lg md:ml-4 relative">
           <button
             className="absolute top-4 right-4 text-3xl text-black hover:text-gray-700"
             onClick={() => onClose(false)}
           >
             &times;
           </button>
-          <h2 className="text-black text-2xl font-bold mb-4">RENGA #2</h2>
+          <h2 className="text-black text-2xl font-bold mb-4">{data?.name}</h2>
           <div className="flex flex-wrap gap-4 text-sm text-black">
             <div className="bg-pink-200 p-2 rounded w-fit">
               <strong>Block Number</strong>
