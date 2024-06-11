@@ -24,16 +24,14 @@ function Modal({ data, onClose, isOpen }: any) {
   // console.log(attributes);
   return (
     <div
-      className={`absolute w-full h-full top-0 right-0 ${
-        isOpen ? "translate-x-0" : "translate-x-full"
-      } bg-gray-900 bg-opacity-50 min-h-screen
+      className={`fixed w-full  top-1/2 -translate-y-1/2 right-0 bg-opacity-50
       h-auto transition-all
       rounded-lg overflow-y-scroll
+      overflow-x-hidden
       z-50`}
     >
-      <div className="relative bg-[#093e79] px-4 w-full max-w-4xl mx-auto flex rounded-lg shadow-lg  flex-col min-h-screen h-auto items-center">
+      <div className="relative bg-[#093e79] px-4 w-full max-w-4xl mx-auto flex rounded-lg shadow-lg  flex-col  h-auto items-center">
         <div className="w-full flex justify-center">
-          (
           <Image
             className="object-contain rounded-lg"
             src={metadata?.image}
@@ -41,7 +39,6 @@ function Modal({ data, onClose, isOpen }: any) {
             height={150}
             alt="Image"
           />
-          )
         </div>
         <div className="flex-1 w-full bg-[#00d4ff] my-2 p-8 rounded-lg md:ml-4 relative">
           <button

@@ -30,7 +30,7 @@ function Item({ item, id }: any) {
 
   return (
     <div className="overflow-hidden">
-      <Modal data={item} onClose={handleClose} isOpen={isModal} />
+      {isModal && <Modal data={item} onClose={handleClose} isOpen={isModal} />}
       <div
         className="max-w-sm rounded overflow-hidden shadow-lg bg-[#ececec] hover:-translate-y-4 transition-transform cursor-pointer"
         key={item?.token_address}
