@@ -3,81 +3,136 @@ import Moralis from "moralis";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
-function Modal({ data, onClose }: any) {
+function Modal({ data, onClose, isOpen }: any) {
+  console.log(data);
+  const {
+    amount,
+    blockNumberMinted,
+    contractType,
+    lastMetadataSync,
+    lastTokenUriSync,
+    metadata,
+    name,
+    ownerOf,
+    possibleSpam,
+    symbol,
+    tokenAddress,
+    tokenHash,
+    tokenUri,
+  } = data._data;
+  console.log(blockNumberMinted?.value);
+  // console.log(attributes);
   return (
-    <div className="absolute inset-0 bg-gray-900 bg-opacity-50  flex items-start justify-center z-50">
-      <div className="bg-pink-200 p-4 w-full max-w-4xl mx-auto flex rounded-lg shadow-lg mt-10 relative  md:flex-row flex-col h-auto">
-        <div className="flex-1 w-full md:w-1/2">
-          {data?.collection_logo && (
-            <Image
-              className="w-full h-full object-contain rounded-lg"
-              src={data?.collection_banner_image}
-              width={200}
-              height={400}
-              alt="Image"
-            />
-          )}
+    <div
+      className={`fixed top-0 right-0 ${
+        isOpen ? "translate-x-0" : "translate-x-full"
+      } bg-gray-900 bg-opacity-50 min-h-screen
+      h-auto transition-all
+      rounded-lg overflow-y-scroll
+      z-50`}
+    >
+      <div className="relative bg-[#093e79] px-4 w-full max-w-4xl mx-auto flex rounded-lg shadow-lg  flex-col min-h-screen h-auto items-center">
+        <div className="w-full flex justify-center">
+          (
+          <Image
+            className="object-contain rounded-lg"
+            src={metadata?.image}
+            width={150}
+            height={150}
+            alt="Image"
+          />
+          )
         </div>
-        <div className="flex-1 w-full md:w-1/2 bg-pink-300 my-2 p-8 rounded-lg md:ml-4 relative">
+        <div className="flex-1 w-full bg-[#00d4ff] my-2 p-8 rounded-lg md:ml-4 relative">
           <button
-            className="absolute top-4 right-4 text-3xl text-black hover:text-gray-700"
+            className="absolute top-4 right-4 text-6xl text-black hover:text-gray-700
+            "
             onClick={() => onClose(false)}
           >
             &times;
           </button>
           <h2 className="text-black text-2xl font-bold mb-4">{data?.name}</h2>
-          <div className="flex flex-wrap gap-4 text-sm text-black">
+          <div className="grid grid-cols-3 gap-4 text-sm text-black">
+            {blockNumberMinted?.value && (
+              <div className="bg-pink-200 p-2 rounded w-fit">
+                <strong>Block Number</strong>
+                <br />
+                {blockNumberMinted?.value}
+              </div>
+            )}
             <div className="bg-pink-200 p-2 rounded w-fit">
-              <strong>Block Number</strong>
+              <strong>GENERAL NAME</strong>
               <br />
-              {data?.block_number}
+              {name}
             </div>
             <div className="bg-pink-200 p-2 rounded w-fit">
+              <strong>AMOUNT</strong>
+              <br />
+              {amount}
+            </div>
+            <div className="bg-pink-200 p-2 rounded w-fit">
+              <strong>ATTRIBUTES</strong>
+              <br />
+              {metadata?.attributes?.map((attribute: string) => (
+                <p key={attribute}>{attribute}</p>
+              ))}
+            </div>
+            <div className="bg-pink-200 p-2 rounded ">
+              <strong>DISCRIPTION</strong>
+              <br />
+              {metadata?.description}
+            </div>
+            <div className="bg-pink-200 p-2 rounded ">
               <strong>NAME</strong>
               <br />
-              {data?.name}
+              {metadata?.name}
+            </div>
+            <div className="bg-pink-200 p-2 rounded ">
+              <strong>CONTRACT TYPE</strong>
+              <br />
+              {contractType}
+            </div>
+            <div className="bg-pink-200 p-2 rounded overflow-x-scroll">
+              <strong>LAST METADATA SYNC</strong>
+              <br />
+              {lastMetadataSync.toString()}
+            </div>
+            <div className="bg-pink-200 p-2 rounded overflow-x-scroll">
+              <strong>LAST TOKEN URI SYNC</strong>
+              <br />
+              {lastTokenUriSync.toString()}
+            </div>
+            {ownerOf && (
+              <div className="bg-pink-200 p-2 rounded overflow-x-scroll md:overflow-auto">
+                <strong>OWNER OF</strong>
+                <br />
+                {ownerOf}
+              </div>
+            )}
+            <div className="bg-pink-200 p-2 rounded">
+              <strong>SYMBOL</strong>
+              <br />
+              {symbol}
             </div>
             <div className="bg-pink-200 p-2 rounded">
-              <strong>contract_type</strong>
+              <strong>POSSIBLE SPAM</strong>
               <br />
-              {data?.contract_type}
-            </div>
-            <div className="bg-pink-200 p-2 rounded">
-              <strong>last_metadata_sync</strong>
-              <br />
-              {data?.last_metadata_sync}
-            </div>
-            <div className="bg-pink-200 p-2 rounded">
-              <strong>last_token_uri_sync</strong>
-              <br />
-              {data?.last_token_uri_sync}
+              {possibleSpam ? "yes" : "no"}
             </div>
             <div className="bg-pink-200 p-2 rounded overflow-x-scroll md:overflow-auto">
-              <strong>owner_of</strong>
+              <strong>TOKEN ADDRESS</strong>
               <br />
-              {data?.owner_of}
+              {tokenAddress?._value}
             </div>
-            <div className="bg-pink-200 p-2 rounded">
-              <strong>symbol</strong>
+            <div className="bg-pink-200 p-2 rounded  overflow-x-scroll">
+              <strong>TOKEN HASH</strong>
               <br />
-              {data?.symbol}
-            </div>
-            <div className="bg-pink-200 p-2 rounded overflow-x-scroll md:overflow-auto">
-              <strong>token_address</strong>
-              <br />
-              {data?.token_address}
-            </div>
-            <div className="bg-pink-200 p-2 rounded">
-              <strong>token_hash</strong>
-              <br />
-              {data?.token_hash}
+              {tokenHash}
             </div>
             <div className="bg-pink-200 p-2 rounded w-full">
-              <strong>token_uri</strong>
+              <strong>TOKEN URI</strong>
               <br />
-              <span className="w-full block overflow-x-scroll">
-                {data?.token_uri}
-              </span>
+              <span className="w-full block overflow-x-scroll">{tokenUri}</span>
             </div>
           </div>
           <div className="absolute bottom-4 left-4">
