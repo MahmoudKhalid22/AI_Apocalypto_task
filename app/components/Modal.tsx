@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 
 function Modal({ data, onClose }: any) {
   return (
-    <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-start justify-center z-50">
+    <div className="absolute inset-0 bg-gray-900 bg-opacity-50  flex items-start justify-center z-50">
       <div className="bg-pink-200 p-4 w-full max-w-4xl mx-auto flex rounded-lg shadow-lg mt-10 relative  md:flex-row flex-col h-auto">
         <div className="flex-1 w-full md:w-1/2">
           {data?.collection_logo && (
