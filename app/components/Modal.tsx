@@ -52,7 +52,7 @@ function Modal({ data, onClose }: any) {
               <br />
               {data?.last_token_uri_sync}
             </div>
-            <div className="bg-pink-200 p-2 rounded">
+            <div className="bg-pink-200 p-2 rounded overflow-x-scroll md:overflow-auto">
               <strong>owner_of</strong>
               <br />
               {data?.owner_of}
@@ -62,7 +62,7 @@ function Modal({ data, onClose }: any) {
               <br />
               {data?.symbol}
             </div>
-            <div className="bg-pink-200 p-2 rounded">
+            <div className="bg-pink-200 p-2 rounded overflow-x-scroll md:overflow-auto">
               <strong>token_address</strong>
               <br />
               {data?.token_address}
