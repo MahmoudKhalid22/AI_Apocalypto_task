@@ -6,8 +6,11 @@ import Image from "next/image";
 
 function Collections() {
   const [collections, setCollections] = useState<any>([]);
+  const [loading, setLoading] = useState(false);
+  //   const [error, setError] = useState(false);
   useEffect(() => {
     async function getData() {
+      setLoading(true);
       try {
         await Moralis.start({
           apiKey:
@@ -31,7 +34,7 @@ function Collections() {
             },
           ],
         });
-
+        setLoading(false);
         // console.log(response.raw);
         setCollections(response.raw);
       } catch (e) {
@@ -40,15 +43,17 @@ function Collections() {
     }
     getData();
   }, []);
-  console.log(collections);
+  console.log(loading);
   return (
     <div>
       <h1>Collections</h1>
       <div className="flex items-center justify-center gap-12">
-        {collections?.map((item: any, i: number) => (
-          // console.log(item);
-          <Item item={item} id={i} key={item?.token_address} />
-        ))}
+        {loading && <p className="text-center">loading...</p>}
+        {!loading &&
+          collections?.map((item: any, i: number) => (
+            // console.log(item);
+            <Item item={item} id={i} key={item?.token_address} />
+          ))}
       </div>
     </div>
   );
