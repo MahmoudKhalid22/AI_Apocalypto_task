@@ -44,9 +44,9 @@ function Item({ item, id }: any) {
           height={50}
         />
         <div className="px-6 py-4">
-          <p>{item?.name}</p>
+          <p>{item?.metadata?.name}</p>
         </div>
-        <p className="px-6 py-1">{item?.possible_spam}</p>
+        <p className="px-6 py-1">{item?.tokenId}</p>
         <p className="px-6 py-1">{item?.contract_type}</p>
       </div>
     </div>
